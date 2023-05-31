@@ -1,0 +1,14 @@
+FROM gradle:jdk17-alpine AS Builder
+WORKDIR /build
+COPY gradle/ gradle/
+COPY gradlew .
+COPY settings.gradle .
+COPY build.gradle .
+
+RUN gradle buildEnvironment
+
+COPY src/ src/
+
+RUN gradle assemble \ 
+&& mv build/libs/mayoo-$(cat build.gradle | grep -e "version = \('[0-9]*\.[0-9]*\.[0-9]*'\)" | sed "{y/'/ /;s/[[:lower:]]* = \([0-9\.]*\)/\1/}" | cut -d" " -f2).jar \
+build/libs/bin.jar
