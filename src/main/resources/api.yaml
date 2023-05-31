@@ -4,11 +4,21 @@ info:
   description: API de l'application MAYOO
   version: 1.0.0
 servers:
-  - url: 'https://localhost:8090'
+  - url: 'http://localhost:8090'
 paths:
-  /user/create:
-    post: 
+  /user/{id_right}/create:
+    post:
       description: route permettant de créer un utilisateur
+      parameters:
+        - name: id_right
+          in: path
+          required: true
+          schema:
+            type: string
+            enum:
+              - eleve
+              - professeur
+              - cuisinier
       requestBody:
         required: true
         content: 
