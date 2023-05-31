@@ -49,6 +49,8 @@ openApiGenerate {
 	generatorName = "spring"
 	inputSpec = "src/main/resources/api.yaml";
 	outputDir = "${buildDir}/generated/openapi"
+	apiPackage = "com.mayoo.openapi.api"
+	modelPackage = "com.mayoo.openapi.model"
 	configOptions = [
 			interfaceOnly: "true",
 			basePackage: "excluded"
