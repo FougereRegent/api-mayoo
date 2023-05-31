@@ -20,6 +20,7 @@ public class UserEntity {
     private String email;
     private String password;
     private String salt;
-    @OneToOne(mappedBy = "id")
+    
+    @OneToOne
     private RightEnity right;
 }

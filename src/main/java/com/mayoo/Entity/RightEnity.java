@@ -12,12 +12,15 @@ import java.security.PrivateKey;
 @Setter
 @Getter
 @Entity
-@Table(name = "Right")
+@Table(name = "UserRight")
 public class RightEnity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
     @Enumerated(EnumType.STRING)
-    private Right right;
+    private Right droit;
+    
+    @OneToOne
+    private UserEntity user;
 }
