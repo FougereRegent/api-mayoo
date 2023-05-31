@@ -1,9 +1,83 @@
 openapi: 3.0.3
 info:
-  title: Title
-  description: Title
+  title: API Mayoo
+  description: API de l'application MAYOO
   version: 1.0.0
 servers:
-  - url: 'https'
+  - url: 'https://localhost:8090'
 paths:
-  
+  /user/create:
+    post: 
+      description: route permettant de créer un utilisateur
+      requestBody:
+        required: true
+        content: 
+          application/json:
+            schema: 
+              $ref: "#/components/schemas/CreateUser"
+      responses: 
+        "201":
+          description: Utilsiateur créer
+        "403":
+          description: Error dans la création de l'utilisateur
+          content: 
+            application/json:
+              schema: 
+                $ref: "#/components/schemas/ErrorMessage"
+  /user/auth:
+    post:
+      description: route permettant l'autentification de l'utilsiateur
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: 
+              $ref: "#/"
+      responses:
+        "200":
+          description: Utilisateur connecter
+        "401":
+          description: Utilisateur non connecter
+          
+components: 
+ schemas: 
+    ErrorMessage:
+      type: object
+      required: 
+        - code
+        - message
+      properties: 
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+    CreateUser:
+      type: object
+      required:
+        - first_name
+        - last_name
+        - email
+        - password
+        - valid_password
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        valid_password:
+          type: string
+    LoginUser:
+      type: object
+      required: 
+        - email
+        - password
+      properties: 
+        email:
+          type: string
+        password:
+          type: string
