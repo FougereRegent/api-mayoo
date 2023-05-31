@@ -1,2 +1,11 @@
-package com.mayoo.Service.FieldUserCheck.Component;public class ExistComponent {
+package com.mayoo.Service.FieldUserCheck.Component;
+
+import com.mayoo.Service.FieldUserCheck.BaseComponent;
+import com.mayoo.openapi.model.CreateUser;
+
+public class ExistComponent extends BaseComponent {
+    @Override
+    public void execute(CreateUser user) {
+
+    }
 }
