@@ -2,6 +2,7 @@ package com.mayoo.Entity;
 
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,6 +10,7 @@ import javax.annotation.processing.Generated;
 
 @Getter
 @Setter
+@Builder
 @Entity
 @Table(name = "User")
 public class UserEntity {
