@@ -24,6 +24,7 @@ public class MailComponent extends BaseComponent<CreateUser> {
         if(!m.find())
             throw new InvalidEmailFormat(email);
 
-        this.nextHandle.execute(user);
+        if(this.nextHandle != null)
+            this.nextHandle.execute(user);
     }
 }

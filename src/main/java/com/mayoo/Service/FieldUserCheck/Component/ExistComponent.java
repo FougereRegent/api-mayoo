@@ -22,6 +22,7 @@ public class ExistComponent extends BaseComponent<CreateUser> {
         Optional<UserEntity> opuser = this.userRepository.findUserEntityByEmail(user.getEmail());
         if(opuser.isPresent())
             throw new UserAlreadyExist(user);
-        this.nextHandle.execute(user);
+        if(this.nextHandle != null)
+            this.nextHandle.execute(user);
     }
 }

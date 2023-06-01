@@ -24,7 +24,8 @@ public class PasswordComponent extends BaseComponent<CreateUser> {
             throw new InvalidUsername("Le mot de passe ne correspond pas au critère de création de mot de passe");
         if(!password.equals(validpassword))
             throw new InvalidPassword("Le mot de passe n'est pas égal à la validation");
-        this.nextHandle.execute(user);
+        if(this.nextHandle != null)
+            this.nextHandle.execute(user);
     }
 
     private boolean checkPassword(String password) {
