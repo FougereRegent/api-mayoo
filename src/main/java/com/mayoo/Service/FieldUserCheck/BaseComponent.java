@@ -1,5 +1,8 @@
 package com.mayoo.Service.FieldUserCheck;
 
+import com.mayoo.Exceptions.CustomException;
+import com.mayoo.Exceptions.UserAlreadyExist;
+
 public abstract class BaseComponent<T> implements IComponentCheck<T> {
 
     protected IComponentCheck<T> nextHandle;
@@ -9,5 +12,5 @@ public abstract class BaseComponent<T> implements IComponentCheck<T> {
     }
 
     @Override
-    public abstract void execute(T user);
+    public abstract void execute(T user) throws CustomException;
 }
