@@ -9,6 +9,14 @@ RUN gradle buildEnvironment
 
 COPY src/ src/
 
-RUN gradle assemble \ 
+RUN gradle openApiGenerate \ 
+&& gradle assemble \
 && mv build/libs/mayoo-$(cat build.gradle | grep -e "version = \('[0-9]*\.[0-9]*\.[0-9]*'\)" | sed "{y/'/ /;s/[[:lower:]]* = \([0-9\.]*\)/\1/}" | cut -d" " -f2).jar \
 build/libs/bin.jar
+
+FROM openjdk:17
+WORKDIR /app
+
+COPY --from=Builder /build/build/libs/bin.jar .
+
+ENTRYPOINT ["java", "-jar", "bin.jar"]
