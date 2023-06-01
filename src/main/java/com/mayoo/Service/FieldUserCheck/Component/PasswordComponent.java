@@ -21,7 +21,7 @@ public class PasswordComponent extends BaseComponent<CreateUser> {
         if(password.isEmpty() || validpassword.isEmpty())
             throw new InvalidPassword("mot de passe vide");
         if(!checkPassword(password))
-            throw new InvalidUsername("Le mot de passe ne correspond pas au critère de création de mot de passe");
+            throw new InvalidPassword("Le mot de passe ne correspond pas au critère de création de mot de passe");
         if(!password.equals(validpassword))
             throw new InvalidPassword("Le mot de passe n'est pas égal à la validation");
         if(this.nextHandle != null)
