@@ -6,20 +6,23 @@ import com.mayoo.Service.FieldUserCheck.CheckCreatingUserBuilder;
 import com.mayoo.Service.FieldUserCheck.IComponentCheck;
 import com.mayoo.openapi.model.CreateUser;
 import com.mayoo.openapi.model.LoginUser;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Random;
 
 @Service
 public class UserService implements IUserService{
 
     private final UserRepository userRepository;
     private final IComponentCheck<CreateUser> componentCheckCreateUser;
+    private final Random random;
 
     @Autowired
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.componentCheckCreateUser = CheckCreatingUserBuilder.builderResponsabilityCheckCreatingUser(userRepository);
+        this.random = new Random();
+        this.componentCheckCreateUser = CheckCreatingUserBuilder.builderResponsabilityCheckCreatingUser(userRepository, random);
     }
 
     @Override
