@@ -6,10 +6,7 @@ import com.mayoo.Exceptions.CustomException;
 import com.mayoo.Repository.UserRepository;
 import com.mayoo.Service.FieldUserCheck.BaseComponent;
 import com.mayoo.openapi.model.CreateUser;
-import org.apache.catalina.User;
-import org.aspectj.apache.bcel.Constants;
-import org.aspectj.apache.bcel.generic.FieldOrMethod;
-import springfox.documentation.service.ApiListing;
+import org.springframework.util.DigestUtils;
 
 import java.util.Random;
 
@@ -22,7 +19,16 @@ public class CreateUserComponent extends BaseComponent<CreateUser> {
     }
     @Override
     public void execute(CreateUser user) throws CustomException {
+        final int salt_size = 10;
         UserEntity userEntity = UserMapper.CreateUserEntityToUserObject(user);
+        String salt = generateSalt(salt_size);
+        String password = String.format("%s%s", salt, user.getPassword());
+        password = createHash(password);
+        
+        userEntity.setSalt(salt);
+        userEntity.setPassword(password);
+        
+        userRepository.save(userEntity);
 
         if(this.nextHandle != null)
             this.nextHandle.execute(user);
@@ -41,6 +47,7 @@ public class CreateUserComponent extends BaseComponent<CreateUser> {
     }
     
     private String createHash(String chaine) {
-        return "";
+        String digest = DigestUtils.md5DigestAsHex(chaine.getBytes());
+        return digest;
     }
 }
