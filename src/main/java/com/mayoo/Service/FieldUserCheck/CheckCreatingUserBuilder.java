@@ -22,6 +22,6 @@ public class CheckCreatingUserBuilder {
         checkUsername.setNext(checkPassword);
         checkPassword.setNext(createUser);
 
-        return checkEmail;
+        return checkExist;
     }
 }
