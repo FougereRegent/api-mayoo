@@ -19,11 +19,6 @@ public class UserController implements UserApi {
     }   
 
     @Override
-    public ResponseEntity<Void> userAuthPost(Object body) {
-        return UserApi.super.userAuthPost(body);
-    }
-
-    @Override
     public ResponseEntity<Void> userIdRightCreatePost(String idRight, CreateUser createUser) {
         ResponseEntity responseEntity;
         try {
