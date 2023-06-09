@@ -1,6 +1,6 @@
 package com.mayoo.Config;
 
-import io.jsonwebtoken.Jwt;
+import com.mayoo.Service.IJwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,7 +15,7 @@ import java.io.IOException;
 @Component
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
-    private final IJwtService jwtService;
+    public final IJwtService jwtService;
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request,
                                     @NonNull  HttpServletResponse response,
