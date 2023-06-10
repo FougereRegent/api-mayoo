@@ -1,20 +1,20 @@
 package com.mayoo.Service;
 
+import com.mayoo.Entity.UserEntity;
 import com.mayoo.Exceptions.CustomException;
 import com.mayoo.Repository.UserRepository;
 import com.mayoo.Service.FieldUserCheck.CheckCreatingUserBuilder;
 import com.mayoo.Service.FieldUserCheck.IComponentCheck;
+import com.mayoo.openapi.model.AuthenticationResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 
 import java.util.Random;
 
 @Service
-public class UserService implements IUserService, UserDetailsService {
+public class UserService implements IUserService {
 
     private final UserRepository userRepository;
     private final IComponentCheck<com.mayoo.openapi.model.RegisterRequest> componentCheckCreateUser;
@@ -32,7 +32,7 @@ public class UserService implements IUserService, UserDetailsService {
     }
 
     @Override
-    public void createUser(com.mayoo.openapi.model.RegisterRequest user) throws CustomException {
+    public AuthenticationResponse createUser(com.mayoo.openapi.model.RegisterRequest user) throws CustomException {
         try {
             this.componentCheckCreateUser.execute(user);
         }
@@ -40,15 +40,28 @@ public class UserService implements IUserService, UserDetailsService {
         {
             throw exception;
         }
+        UserEntity userEntity = userRepository.findUserEntityByEmail(user.getEmail())
+                .orElseThrow();
+        String jwtToken = jwtService.generateToken(userEntity);
+        AuthenticationResponse response = new AuthenticationResponse();
+        response.token(jwtToken);
+        return response;
     }
 
     @Override
-    public void logInUser(com.mayoo.openapi.model.AuthenticationRequest user) {
-
-    }
-
-    @Override
-public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return null;
+    public com.mayoo.openapi.model.AuthenticationResponse logInUser(com.mayoo.openapi.model.AuthenticationRequest user) {
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        user.getEmail(),
+                        user.getPassword()
+                )
+        );
+        UserEntity userEntity = userRepository.findUserEntityByEmail(user.getEmail())
+                .orElseThrow();
+        
+        String jwtToken = jwtService.generateToken(userEntity);
+        com.mayoo.openapi.model.AuthenticationResponse response = new AuthenticationResponse();
+        response.token(jwtToken);
+        return response;
     }
 }

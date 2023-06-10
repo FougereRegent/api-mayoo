@@ -21,7 +21,7 @@ public class SecutiryConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf()
                 .disable().authorizeHttpRequests()
-                .requestMatchers("")
+                .requestMatchers("/auth/user/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()

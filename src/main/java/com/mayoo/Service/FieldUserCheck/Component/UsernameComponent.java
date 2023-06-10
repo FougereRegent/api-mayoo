@@ -2,7 +2,6 @@ package com.mayoo.Service.FieldUserCheck.Component;
 
 import com.mayoo.Exceptions.CustomException;
 import com.mayoo.Exceptions.EmptyUsername;
-import com.mayoo.Exceptions.InvalidUsername;
 import com.mayoo.Service.FieldUserCheck.BaseComponent;
 
 import java.util.regex.Matcher;
@@ -19,7 +18,7 @@ public class UsernameComponent extends BaseComponent<com.mayoo.openapi.model.Reg
         Matcher mlast_name = pattern.matcher(last_name);
 
         if(first_name.isEmpty() || last_name.isEmpty()) throw new EmptyUsername();
-        if(!(mfirst_name.find() && mlast_name.find())) throw new InvalidUsername(user);
+        //if((mfirst_name.find() && mlast_name.find())) throw new InvalidUsername(user);
 
         if(this.nextHandle != null)
             this.nextHandle.execute(user);

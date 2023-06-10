@@ -17,11 +17,11 @@ public class UserController implements com.mayoo.openapi.api.AuthApi {
     private final IUserService userService;
 
     @Override
-    public ResponseEntity<Void> authUserIdRightCreatePost(String idRight, RegisterRequest registerRequest) {
+    public ResponseEntity<AuthenticationResponse> authUserIdRightCreatePost(String idRight, RegisterRequest registerRequest) {
         ResponseEntity responseEntity;
         try {
-            userService.createUser(registerRequest);
-            responseEntity = new ResponseEntity(HttpStatus.CREATED);
+            AuthenticationResponse response = userService.createUser(registerRequest);
+            responseEntity = ResponseEntity.ok(response);
         } catch (CustomException exception) {
             responseEntity = new ResponseEntity(HttpStatus.FORBIDDEN);
         }

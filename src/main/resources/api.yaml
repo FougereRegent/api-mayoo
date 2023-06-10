@@ -28,6 +28,10 @@ paths:
       responses: 
         "201":
           description: Utilisateur créer
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthenticationResponse"
         "403":
           description: Error dans la création de l'utilisateur
           content: 
