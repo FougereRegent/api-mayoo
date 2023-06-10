@@ -7,12 +7,15 @@ import com.mayoo.Service.FieldUserCheck.IComponentCheck;
 import com.mayoo.openapi.model.CreateUser;
 import com.mayoo.openapi.model.LoginUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Random;
 
 @Service
-public class UserService implements IUserService{
+public class UserService implements IUserService, UserDetailsService {
 
     private final UserRepository userRepository;
     private final IComponentCheck<CreateUser> componentCheckCreateUser;
@@ -39,5 +42,10 @@ public class UserService implements IUserService{
     @Override
     public void logInUser(LoginUser user) {
 
+    }
+
+    @Override
+public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return null;
     }
 }
