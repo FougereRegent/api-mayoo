@@ -2,19 +2,18 @@ package com.mayoo.Service.FieldUserCheck.Component;
 
 import com.mayoo.Exceptions.CustomException;
 import com.mayoo.Exceptions.InvalidPassword;
-import com.mayoo.Exceptions.InvalidUsername;
 import com.mayoo.Service.FieldUserCheck.BaseComponent;
-import com.mayoo.openapi.model.CreateUser;
 
-import java.util.regex.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-public class PasswordComponent extends BaseComponent<CreateUser> {
+public class PasswordComponent extends BaseComponent<com.mayoo.openapi.model.RegisterRequest> {
 
     private final String regex_password = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
     private final Pattern pattern = Pattern.compile(regex_password);
 
     @Override
-    public void execute(CreateUser user) throws CustomException {
+    public void execute(com.mayoo.openapi.model.RegisterRequest user) throws CustomException {
         String password = user.getPassword();
         String validpassword = user.getValidPassword();
 

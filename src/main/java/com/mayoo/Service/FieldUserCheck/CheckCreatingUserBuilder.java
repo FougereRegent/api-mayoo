@@ -5,17 +5,16 @@ import com.mayoo.Service.FieldUserCheck.Component.CreateUserComponent;
 import com.mayoo.Service.FieldUserCheck.Component.ExistComponent;
 import com.mayoo.Service.FieldUserCheck.Component.MailComponent;
 import com.mayoo.Service.FieldUserCheck.Component.UsernameComponent;
-import com.mayoo.openapi.model.CreateUser;
 
 import java.util.Random;
 
 public class CheckCreatingUserBuilder {
-    public static IComponentCheck<CreateUser> builderResponsabilityCheckCreatingUser(UserRepository userRepository, Random random) {
-        IComponentCheck<CreateUser> checkExist = new ExistComponent(userRepository);
-        IComponentCheck<CreateUser> createUser = new CreateUserComponent(userRepository, random);
-        IComponentCheck<CreateUser> checkEmail = new MailComponent();
-        IComponentCheck<CreateUser> checkUsername = new UsernameComponent();
-        IComponentCheck<CreateUser> checkPassword = new UsernameComponent();
+    public static IComponentCheck<com.mayoo.openapi.model.RegisterRequest> builderResponsabilityCheckCreatingUser(UserRepository userRepository, Random random) {
+        IComponentCheck<com.mayoo.openapi.model.RegisterRequest> checkExist = new ExistComponent(userRepository);
+        IComponentCheck<com.mayoo.openapi.model.RegisterRequest> createUser = new CreateUserComponent(userRepository, random);
+        IComponentCheck<com.mayoo.openapi.model.RegisterRequest> checkEmail = new MailComponent();
+        IComponentCheck<com.mayoo.openapi.model.RegisterRequest> checkUsername = new UsernameComponent();
+        IComponentCheck<com.mayoo.openapi.model.RegisterRequest> checkPassword = new UsernameComponent();
 
         checkExist.setNext(checkEmail);
         checkEmail.setNext(checkUsername);

@@ -6,19 +6,15 @@ import com.mayoo.openapi.api.AuthApi;
 import com.mayoo.openapi.model.AuthenticationRequest;
 import com.mayoo.openapi.model.AuthenticationResponse;
 import com.mayoo.openapi.model.RegisterRequest;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequiredArgsConstructor
 public class UserController implements com.mayoo.openapi.api.AuthApi {
     private final IUserService userService;
-    
-    @Autowired
-    public UserController(IUserService userService) {
-        this.userService = userService;
-    }
 
     @Override
     public ResponseEntity<Void> authUserIdRightCreatePost(String idRight, RegisterRequest registerRequest) {

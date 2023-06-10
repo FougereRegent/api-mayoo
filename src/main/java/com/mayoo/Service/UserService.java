@@ -4,9 +4,8 @@ import com.mayoo.Exceptions.CustomException;
 import com.mayoo.Repository.UserRepository;
 import com.mayoo.Service.FieldUserCheck.CheckCreatingUserBuilder;
 import com.mayoo.Service.FieldUserCheck.IComponentCheck;
-import com.mayoo.openapi.model.CreateUser;
-import com.mayoo.openapi.model.LoginUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -18,18 +17,22 @@ import java.util.Random;
 public class UserService implements IUserService, UserDetailsService {
 
     private final UserRepository userRepository;
-    private final IComponentCheck<CreateUser> componentCheckCreateUser;
+    private final IComponentCheck<com.mayoo.openapi.model.RegisterRequest> componentCheckCreateUser;
+    private final IJwtService jwtService;
+    private final AuthenticationManager authenticationManager;
     private final Random random;
 
     @Autowired
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, IJwtService jwtService, AuthenticationManager authenticationManager) {
         this.userRepository = userRepository;
         this.random = new Random();
         this.componentCheckCreateUser = CheckCreatingUserBuilder.builderResponsabilityCheckCreatingUser(userRepository, random);
+        this.jwtService = jwtService;
+        this.authenticationManager = authenticationManager;
     }
 
     @Override
-    public void createUser(CreateUser user) throws CustomException {
+    public void createUser(com.mayoo.openapi.model.RegisterRequest user) throws CustomException {
         try {
             this.componentCheckCreateUser.execute(user);
         }
@@ -40,7 +43,7 @@ public class UserService implements IUserService, UserDetailsService {
     }
 
     @Override
-    public void logInUser(LoginUser user) {
+    public void logInUser(com.mayoo.openapi.model.AuthenticationRequest user) {
 
     }
 

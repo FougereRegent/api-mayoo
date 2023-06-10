@@ -5,12 +5,11 @@ import com.mayoo.Entity.UserEntity;
 import com.mayoo.Exceptions.CustomException;
 import com.mayoo.Repository.UserRepository;
 import com.mayoo.Service.FieldUserCheck.BaseComponent;
-import com.mayoo.openapi.model.CreateUser;
 import org.springframework.util.DigestUtils;
 
 import java.util.Random;
 
-public class CreateUserComponent extends BaseComponent<CreateUser> {
+public class CreateUserComponent extends BaseComponent<com.mayoo.openapi.model.RegisterRequest> {
     private final UserRepository userRepository;
     private final Random random;
     public CreateUserComponent(UserRepository userRepository, Random random) {
@@ -18,7 +17,7 @@ public class CreateUserComponent extends BaseComponent<CreateUser> {
         this.random = random;
     }
     @Override
-    public void execute(CreateUser user) throws CustomException {
+    public void execute(com.mayoo.openapi.model.RegisterRequest user) throws CustomException {
         final int salt_size = 10;
         UserEntity userEntity = UserMapper.CreateUserEntityToUserObject(user);
         String salt = generateSalt(salt_size);

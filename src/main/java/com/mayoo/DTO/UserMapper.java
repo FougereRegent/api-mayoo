@@ -1,10 +1,9 @@
 package com.mayoo.DTO;
 
 import com.mayoo.Entity.UserEntity;
-import com.mayoo.openapi.model.CreateUser;
 
 public class UserMapper {
-    public static UserEntity CreateUserEntityToUserObject(CreateUser user) {
+    public static UserEntity CreateUserEntityToUserObject(com.mayoo.openapi.model.RegisterRequest user) {
         UserEntity result = UserEntity.builder()
                 .email(user.getEmail())
                 .firstName(user.getFirstName())
