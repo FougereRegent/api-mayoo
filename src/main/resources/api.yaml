@@ -62,7 +62,7 @@ components:
           format: int32
         message:
           type: string
-    CreateUser:
+    RegisterRequest:
       type: object
       required:
         - first_name
@@ -81,7 +81,7 @@ components:
           type: string
         valid_password:
           type: string
-    LoginUser:
+    AuthenticationRequest:
       type: object
       required: 
         - email
@@ -90,4 +90,9 @@ components:
         email:
           type: string
         password:
+          type: string
+    AuthenticationResponse:
+      type: object
+      properties: 
+        token:
           type: string
