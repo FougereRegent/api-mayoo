@@ -19,10 +19,8 @@ public class SecutiryConfiguration {
     
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .csrf()
-                .disable()
-                .authorizeHttpRequests()
+        http.csrf()
+                .disable().authorizeHttpRequests()
                 .requestMatchers("")
                 .permitAll()
                 .anyRequest()
@@ -32,7 +30,7 @@ public class SecutiryConfiguration {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authenticationProvider(authenticationProvider)
-                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
     
