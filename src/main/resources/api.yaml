@@ -6,7 +6,7 @@ info:
 servers:
   - url: 'http://localhost:8090'
 paths:
-  /user/{id_right}/create:
+  /auth/user/{id_right}/create:
     post:
       description: route permettant de créer un utilisateur
       parameters:
@@ -34,7 +34,7 @@ paths:
             application/json:
               schema: 
                 $ref: "#/components/schemas/ErrorMessage"
-  /user/auth:
+  /auth/user:
     post:
       description: route permettant l'autentification de l'utilsiateur
       requestBody:
