@@ -24,10 +24,10 @@ paths:
         content: 
           application/json:
             schema: 
-              $ref: "#/components/schemas/CreateUser"
+              $ref: "#/components/schemas/RegisterRequest"
       responses: 
         "201":
-          description: Utilsiateur créer
+          description: Utilisateur créer
         "403":
           description: Error dans la création de l'utilisateur
           content: 
@@ -42,10 +42,14 @@ paths:
         content:
           application/json:
             schema: 
-              $ref: "#/"
+              $ref: "#/components/schemas/AuthenticationRequest"
       responses:
         "200":
           description: Utilisateur connecter
+          content: 
+            application/json:
+              schema: 
+                $ref: "#/components/schemas/AuthenticationResponse"
         "401":
           description: Utilisateur non connecter
           
