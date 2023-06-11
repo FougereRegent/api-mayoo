@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Setter
 @Getter
 @Builder
@@ -19,4 +21,6 @@ public class FlatEntity {
     private String description;
     @Enumerated(EnumType.STRING)
     private EnumFlatType flatType;
+    @ManyToMany
+    private List<PictogramEntity> pictogramEntities;
 }
