@@ -1,20 +1,23 @@
 package com.mayoo.Service.FieldUserCheck.Component;
 
 import com.mayoo.DTO.UserMapper;
+import com.mayoo.Entity.Enum.EnumRight;
 import com.mayoo.Entity.UserEntity;
 import com.mayoo.Exceptions.CustomException;
 import com.mayoo.Repository.UserRepository;
 import com.mayoo.Service.FieldUserCheck.BaseComponent;
-import org.springframework.util.DigestUtils;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Random;
 
 public class CreateUserComponent extends BaseComponent<com.mayoo.openapi.model.RegisterRequest> {
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
     private final Random random;
-    public CreateUserComponent(UserRepository userRepository, Random random) {
+    public CreateUserComponent(UserRepository userRepository, Random random, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.random = random;
+        this.passwordEncoder = passwordEncoder;
     }
     @Override
     public void execute(com.mayoo.openapi.model.RegisterRequest user) throws CustomException {
@@ -22,11 +25,11 @@ public class CreateUserComponent extends BaseComponent<com.mayoo.openapi.model.R
         UserEntity userEntity = UserMapper.CreateUserEntityToUserObject(user);
         String salt = generateSalt(salt_size);
         String password = String.format("%s%s", salt, user.getPassword());
-        password = createHash(password);
+        password = passwordEncoder.encode(password);
         
         userEntity.setSalt(salt);
         userEntity.setPassword(password);
-        
+        userEntity.setRightUser(EnumRight.STUDENT);
         userRepository.save(userEntity);
 
         if(this.nextHandle != null)
@@ -43,10 +46,5 @@ public class CreateUserComponent extends BaseComponent<com.mayoo.openapi.model.R
             result.append(c);
         }
         return result.toString();
-    }
-    
-    private String createHash(String chaine) {
-        String digest = DigestUtils.md5DigestAsHex(chaine.getBytes());
-        return digest;
     }
 }

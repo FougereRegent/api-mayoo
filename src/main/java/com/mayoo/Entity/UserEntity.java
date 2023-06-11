@@ -1,7 +1,7 @@
 package com.mayoo.Entity;
 
+import com.mayoo.Entity.Enum.EnumRight;
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
@@ -11,7 +11,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
-@Builder
 @Entity
 @Getter
 @Setter
@@ -26,12 +25,16 @@ public class UserEntity implements UserDetails {
     private String password;
     private String salt;
     
-    @OneToOne
-    private RightEnity right;
+    @Enumerated(EnumType.STRING)
+    private EnumRight rightUser;
+
+    public UserEntity() {
+        
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(right.getDroit().name()));
+        return List.of(new SimpleGrantedAuthority(rightUser.name()));
     }
 
     @Override

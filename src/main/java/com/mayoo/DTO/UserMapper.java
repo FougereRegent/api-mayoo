@@ -4,12 +4,11 @@ import com.mayoo.Entity.UserEntity;
 
 public class UserMapper {
     public static UserEntity CreateUserEntityToUserObject(com.mayoo.openapi.model.RegisterRequest user) {
-        UserEntity result = UserEntity.builder()
-                .email(user.getEmail())
-                .firstName(user.getFirstName())
-                .lastName(user.getLastName())
-                .password(user.getPassword())
-                .build();
+        UserEntity result = new UserEntity();
+        result.setEmail(user.getEmail());
+        result.setFirstName(user.getFirstName());
+        result.setLastName(user.getLastName());
+        result.setPassword(user.getPassword());
         return result;
     }
 }

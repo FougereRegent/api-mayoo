@@ -2,9 +2,9 @@ package com.mayoo.Controller;
 
 import com.mayoo.Exceptions.CustomException;
 import com.mayoo.Service.IUserService;
-import com.mayoo.openapi.api.AuthApi;
 import com.mayoo.openapi.model.AuthenticationRequest;
 import com.mayoo.openapi.model.AuthenticationResponse;
+import com.mayoo.openapi.model.ErrorMessage;
 import com.mayoo.openapi.model.RegisterRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -30,6 +30,16 @@ public class UserController implements com.mayoo.openapi.api.AuthApi {
 
     @Override
     public ResponseEntity<AuthenticationResponse> authUserPost(AuthenticationRequest authenticationRequest) {
-        return AuthApi.super.authUserPost(authenticationRequest);
+        ResponseEntity responseEntity;
+        try {
+            AuthenticationResponse response = userService.logInUser(authenticationRequest);
+            responseEntity = ResponseEntity.ok(response);
+        } catch (CustomException exception) {
+            com.mayoo.openapi.model.ErrorMessage errorMessage = new ErrorMessage();
+            errorMessage.message(exception.getMessage());
+            errorMessage.code(401);
+            responseEntity = new ResponseEntity(errorMessage, HttpStatus.UNAUTHORIZED); 
+        }
+        return responseEntity;
     }
 }

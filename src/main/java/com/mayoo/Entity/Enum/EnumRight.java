@@ -1,6 +1,6 @@
 package com.mayoo.Entity.Enum;
 
-public enum Right {
+public enum EnumRight {
     STUDENT,
     COOKER,
     TEACHER
