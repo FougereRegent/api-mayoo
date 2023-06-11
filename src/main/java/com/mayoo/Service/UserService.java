@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
+import org.springframework.util.DigestUtils;
 
 import java.util.Random;
 
@@ -49,7 +50,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public com.mayoo.openapi.model.AuthenticationResponse logInUser(com.mayoo.openapi.model.AuthenticationRequest user) {
+    public com.mayoo.openapi.model.AuthenticationResponse logInUser(com.mayoo.openapi.model.AuthenticationRequest user) throws CustomException{
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         user.getEmail(),
@@ -59,9 +60,22 @@ public class UserService implements IUserService {
         UserEntity userEntity = userRepository.findUserEntityByEmail(user.getEmail())
                 .orElseThrow();
         
+        if(!checkPasswordIsSame(userEntity, user))
+            throw new InvalidUserCredentials();
+        
         String jwtToken = jwtService.generateToken(userEntity);
         com.mayoo.openapi.model.AuthenticationResponse response = new AuthenticationResponse();
         response.token(jwtToken);
         return response;
+    }
+    
+    private boolean checkPasswordIsSame(UserEntity user, com.mayoo.openapi.model.AuthenticationRequest userRequest) {
+        final String passwordDb  = user.getPassword();
+        final String saltDb = user.getSalt();
+        
+        String password = String.format("%s%s", saltDb, userRequest.getPassword());
+        String digest = DigestUtils.md5DigestAsHex(password.getBytes());
+
+        return passwordDb.equals(digest);
     }
 }
