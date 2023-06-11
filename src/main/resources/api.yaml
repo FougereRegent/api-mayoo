@@ -104,3 +104,32 @@ components:
       properties: 
         token:
           type: string
+    Flat:
+      type: object
+      properties: 
+        name:
+          type: string
+        description:
+          type: string
+        flatType:
+          enum:
+            - STARTER
+            - FLAT
+            - DESSERT
+        pictograms:
+          type: array
+          items: 
+            type: number
+            format: int32
+    Pictograms:
+      type: object
+      properties: 
+        name:
+          type: string
+        description:
+            type: string
+        typepictogram:
+          enum:
+            - NORMAL
+            - WARNING
+            - DANGER
