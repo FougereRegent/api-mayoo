@@ -1,30 +1,23 @@
 package com.mayoo.Service.ResponsabiltyChain.FieldFlatCheck.Component;
 
-import com.mayoo.Entity.FlatEntity;
 import com.mayoo.Exceptions.CustomException;
-import com.mayoo.Exceptions.FlatExceptions.FlatAlreadyExist;
 import com.mayoo.Repository.FlatRepository;
+import com.mayoo.Repository.PictogramRepository;
 import com.mayoo.Service.ResponsabiltyChain.BaseComponent;
 import com.mayoo.openapi.model.Flat;
 
-import java.util.Optional;
-
-public class CheckExistComponent extends BaseComponent<Flat> {
+public class CreateFlatComponent extends BaseComponent<com.mayoo.openapi.model.Flat> {
     private final FlatRepository flatRepository;
+    private final PictogramRepository pictogramRepository;
     
-    public CheckExistComponent(FlatRepository flatRepository) {
+    public CreateFlatComponent(FlatRepository flatRepository, PictogramRepository pictogramRepository) {
         this.flatRepository = flatRepository;
+        this.pictogramRepository = pictogramRepository;
     }
-    
     @Override
     public void execute(Flat user) throws CustomException {
-        final String name = user.getName();
-
-        Optional<FlatEntity> flatEntity = flatRepository.findByName(name);
         
-        if(flatEntity.isPresent())
-            throw new FlatAlreadyExist();
-                
+        
         if(nextHandle != null)
             nextHandle.execute(user);
     }
