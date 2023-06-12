@@ -1,7 +1,7 @@
 package com.mayoo.Service.ResponsabiltyChain.FieldUserCheck.Component;
 
 import com.mayoo.Exceptions.CustomException;
-import com.mayoo.Exceptions.InvalidPassword;
+import com.mayoo.Exceptions.UserExceptions.InvalidPassword;
 import com.mayoo.Service.ResponsabiltyChain.BaseComponent;
 
 import java.util.regex.Matcher;

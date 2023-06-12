@@ -1,7 +1,7 @@
 package com.mayoo.Service.ResponsabiltyChain.FieldUserCheck.Component;
 
 import com.mayoo.Exceptions.CustomException;
-import com.mayoo.Exceptions.EmptyUsername;
+import com.mayoo.Exceptions.UserExceptions.EmptyUsername;
 import com.mayoo.Service.ResponsabiltyChain.BaseComponent;
 
 import java.util.regex.Matcher;

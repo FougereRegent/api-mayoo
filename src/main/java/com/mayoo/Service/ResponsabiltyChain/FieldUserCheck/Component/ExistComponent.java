@@ -2,7 +2,7 @@ package com.mayoo.Service.ResponsabiltyChain.FieldUserCheck.Component;
 
 import com.mayoo.Entity.UserEntity;
 import com.mayoo.Exceptions.CustomException;
-import com.mayoo.Exceptions.UserAlreadyExist;
+import com.mayoo.Exceptions.UserExceptions.UserAlreadyExist;
 import com.mayoo.Repository.UserRepository;
 import com.mayoo.Service.ResponsabiltyChain.BaseComponent;
 

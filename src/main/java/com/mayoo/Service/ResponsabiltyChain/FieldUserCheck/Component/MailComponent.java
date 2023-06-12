@@ -1,8 +1,8 @@
 package com.mayoo.Service.ResponsabiltyChain.FieldUserCheck.Component;
 
 import com.mayoo.Exceptions.CustomException;
-import com.mayoo.Exceptions.EmailIsEmpty;
-import com.mayoo.Exceptions.InvalidEmailFormat;
+import com.mayoo.Exceptions.UserExceptions.EmailIsEmpty;
+import com.mayoo.Exceptions.UserExceptions.InvalidEmailFormat;
 import com.mayoo.Service.ResponsabiltyChain.BaseComponent;
 
 import java.util.regex.Matcher;
