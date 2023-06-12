@@ -25,6 +25,7 @@ public class FlatService implements IFlatService{
 
     @Override
     public void addFlat(Flat flat) {
+        
     }
 
     @Override
