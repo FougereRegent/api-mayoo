@@ -1,6 +1,8 @@
-package com.mayoo.Exceptions;
+package com.mayoo.Exceptions.UserExceptions;
 
-public class UserAlreadyExist extends  CustomException{
+import com.mayoo.Exceptions.CustomException;
+
+public class UserAlreadyExist extends CustomException {
     public UserAlreadyExist(com.mayoo.openapi.model.RegisterRequest createUser) {
         super(String.format("%s %s existe déja", createUser.getFirstName(), createUser.getLastName()));
     }

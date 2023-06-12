@@ -1,4 +1,6 @@
-package com.mayoo.Exceptions;
+package com.mayoo.Exceptions.UserExceptions;
+
+import com.mayoo.Exceptions.CustomException;
 
 public class EmptyUsername extends CustomException {
     public EmptyUsername() {
