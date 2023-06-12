@@ -8,6 +8,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface FlatRepository extends JpaRepository<FlatEntity, Long> {
-    Optional<FlatEntity> findByNameAnd(String name);
+    Optional<FlatEntity> findByName(String name);
     List<FlatEntity> findFlatEntitiesByFlatTypeAnd(EnumFlatType flatType);
 }
