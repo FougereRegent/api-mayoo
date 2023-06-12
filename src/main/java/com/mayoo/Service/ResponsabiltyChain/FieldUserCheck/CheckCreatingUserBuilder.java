@@ -1,10 +1,11 @@
-package com.mayoo.Service.FieldUserCheck;
+package com.mayoo.Service.ResponsabiltyChain.FieldUserCheck;
 
 import com.mayoo.Repository.UserRepository;
-import com.mayoo.Service.FieldUserCheck.Component.CreateUserComponent;
-import com.mayoo.Service.FieldUserCheck.Component.ExistComponent;
-import com.mayoo.Service.FieldUserCheck.Component.MailComponent;
-import com.mayoo.Service.FieldUserCheck.Component.UsernameComponent;
+import com.mayoo.Service.ResponsabiltyChain.FieldUserCheck.Component.CreateUserComponent;
+import com.mayoo.Service.ResponsabiltyChain.FieldUserCheck.Component.ExistComponent;
+import com.mayoo.Service.ResponsabiltyChain.FieldUserCheck.Component.MailComponent;
+import com.mayoo.Service.ResponsabiltyChain.FieldUserCheck.Component.UsernameComponent;
+import com.mayoo.Service.ResponsabiltyChain.IComponentCheck;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Random;

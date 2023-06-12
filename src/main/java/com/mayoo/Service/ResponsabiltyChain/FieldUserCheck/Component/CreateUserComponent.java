@@ -1,11 +1,11 @@
-package com.mayoo.Service.FieldUserCheck.Component;
+package com.mayoo.Service.ResponsabiltyChain.FieldUserCheck.Component;
 
 import com.mayoo.DTO.UserMapper;
 import com.mayoo.Entity.Enum.EnumRight;
 import com.mayoo.Entity.UserEntity;
 import com.mayoo.Exceptions.CustomException;
 import com.mayoo.Repository.UserRepository;
-import com.mayoo.Service.FieldUserCheck.BaseComponent;
+import com.mayoo.Service.ResponsabiltyChain.BaseComponent;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Random;

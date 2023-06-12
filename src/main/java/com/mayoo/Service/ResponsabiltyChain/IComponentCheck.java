@@ -1,4 +1,4 @@
-package com.mayoo.Service.FieldUserCheck;
+package com.mayoo.Service.ResponsabiltyChain;
 
 import com.mayoo.Exceptions.CustomException;
 public interface IComponentCheck<T> {
