@@ -28,4 +28,9 @@ public class FlatMapper {
         
         return flat;
     }
+    
+    public static FlatEntity flatToFlatEntiry(Flat flat) {
+        
+        return null;
+    }
 }

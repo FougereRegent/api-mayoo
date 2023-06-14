@@ -14,7 +14,6 @@ public class CreateFlatComponent extends BaseComponent<com.mayoo.openapi.model.F
     @Override
     public void execute(Flat user) throws CustomException {
         
-        
         if(nextHandle != null)
             nextHandle.execute(user);
     }
