@@ -9,5 +9,5 @@ import java.util.Optional;
 
 public interface FlatRepository extends JpaRepository<FlatEntity, Long> {
     Optional<FlatEntity> findByName(String name);
-    List<FlatEntity> findFlatEntitiesByFlatTypeAnd(EnumFlatType flatType);
+    List<FlatEntity> findFlatEntitiesByFlatType(EnumFlatType flatType);
 }
