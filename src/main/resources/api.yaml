@@ -83,8 +83,9 @@ paths:
             application/json:
               schema: 
                 type: array
-                items: 
-                  - $ref: "#/components/schemas/Flat"
+                items:
+                  anyOf:
+                    - $ref: "#/components/schemas/Flat"
   
   /flat/{id}:
     get:
