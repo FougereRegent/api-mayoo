@@ -31,7 +31,6 @@ public class FlatService implements IFlatService{
     @Override
     public void addFlat(Flat flat) throws CustomException {
         IComponentCheck<Flat> check = CheckCreatingFlatBuilder.builder(flatRepository, pictogramRepository);
-        
         try {
             check.execute(flat);
         }

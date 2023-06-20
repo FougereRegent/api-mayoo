@@ -84,7 +84,7 @@ paths:
               schema: 
                 type: array
                 items:
-                  anyOf:
+                  oneOf:
                     - $ref: "#/components/schemas/Flat"
   
   /flat/{id}:

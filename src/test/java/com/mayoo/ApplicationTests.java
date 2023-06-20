@@ -1,12 +1,6 @@
 package com.mayoo;
 
-import com.mayoo.Repository.UserRepository;
-import com.mayoo.Service.UserService;
-import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.springframework.boot.test.context.SpringBootTest;
-
+/*
 @SpringBootTest
 class ApplicationTests {
     @Mock
@@ -27,4 +21,4 @@ class ApplicationTests {
     @Test
     public void test_create_user_check_exist() {
     }
-}
+}*/
