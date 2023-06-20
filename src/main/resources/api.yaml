@@ -79,6 +79,13 @@ paths:
       responses: 
         "200":
           description: Renvoie toutes les plats qui sont dans la base de données
+          content: 
+            application/json:
+              schema: 
+                type: array
+                items: 
+                  - $ref: "#/components/schemas/Flat"
+  
   /flat/{id}:
     get:
       description: route permettant de récupérer un plat précis
