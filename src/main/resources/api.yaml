@@ -56,7 +56,51 @@ paths:
                 $ref: "#/components/schemas/AuthenticationResponse"
         "401":
           description: Utilisateur non connecter
-          
+  /flat:
+    post:
+      description: route permetant l'ajout d'un plat
+      requestBody:
+        required: true
+        content: 
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Flat"
+      responses: 
+        "201":
+          description: Plat créer
+        "403":
+          description: Erreur lors de la création des plats
+          content: 
+            application/json:
+              schema: 
+                $ref: "#/components/schemas/ErrorMessage"
+    get:
+      description: route permetant d'avoir tous les plats dans la base de données
+      responses: 
+        "200":
+          description: Renvoie toutes les plats qui sont dans la base de données
+  /flat/{id}:
+    get:
+      description: route permettant de récupérer un plat précis
+      parameters:
+        - name : id
+          in: path
+          required: true
+          schema: 
+            type: integer
+      responses: 
+        "200":
+          description: retourne le plat si il existe
+          content: 
+            application/json:
+              schema: 
+                $ref: "#/components/schemas/Flat"
+        "404":
+          description: plat non trouvé
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
 components: 
  schemas: 
     ErrorMessage:
