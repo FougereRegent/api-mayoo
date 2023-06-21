@@ -5,6 +5,7 @@ import com.mayoo.openapi.api.FlatApi;
 import com.mayoo.openapi.model.Flat;
 import com.mayoo.openapi.model.FlatGet200ResponseInner;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,7 +18,9 @@ public class FlatController implements com.mayoo.openapi.api.FlatApi {
 
     @Override
     public ResponseEntity<List<FlatGet200ResponseInner>> flatGet() {
-        return FlatApi.super.flatGet();
+        List<Flat> flats = flatService.allFlat();
+        
+        return new ResponseEntity(flats, HttpStatus.OK);
     }
 
     @Override
