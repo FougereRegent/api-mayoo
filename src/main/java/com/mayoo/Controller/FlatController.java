@@ -22,7 +22,7 @@ public class FlatController implements com.mayoo.openapi.api.FlatApi {
         
         return new ResponseEntity(flats, HttpStatus.OK);
     }
-
+    
     @Override
     public ResponseEntity<Flat> flatIdGet(Integer id) {
         return FlatApi.super.flatIdGet(id);

@@ -2,11 +2,9 @@ package com.mayoo.Entity;
 
 import com.mayoo.Entity.Enum.EnumDangerType;
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-@Builder
 @Getter
 @Setter
 @Entity

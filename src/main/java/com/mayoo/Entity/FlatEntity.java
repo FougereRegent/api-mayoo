@@ -2,7 +2,6 @@ package com.mayoo.Entity;
 
 import com.mayoo.Entity.Enum.EnumFlatType;
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,7 +9,6 @@ import java.util.List;
 
 @Setter
 @Getter
-@Builder
 @Entity
 @Table(name = "flat")
 public class FlatEntity {
