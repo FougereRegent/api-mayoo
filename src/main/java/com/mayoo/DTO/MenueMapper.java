@@ -11,7 +11,7 @@ public class MenueMapper {
         com.mayoo.openapi.model.Menue m = new Menue();
         List<com.mayoo.openapi.model.Flat> flats = new ArrayList<>();
         menue.getFlats()
-                        .forEach(FlatMapper::flatEntityToFlat);
+                        .forEach(c -> flats.add(FlatMapper.flatEntityToFlat(c)));
         m.date(menue.getDate().toString());
         m.setFlats(flats);
         return m; 
