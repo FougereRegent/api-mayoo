@@ -109,6 +109,36 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorMessage"
+  /menue:
+    get:
+      description: permet d'obtenir tous les menues de la semaine
+      responses: 
+        "200":
+          description: retourne tous les menue de la semaine
+          content: 
+            application/json:
+              schema:
+                items: 
+                  $ref: "#/components/schemas/Menue"
+        "404":
+          description: menue non trouvé
+    post:
+      description: ajoute un menue
+      requestBody:
+        required: true
+        content: 
+          application/json: 
+            schema: 
+              $ref: "#/components/schemas/Menue"
+      responses:
+        "201":
+          description: Menue créer
+        "403":
+          description: Menue pas créer a cause des erreurs
+          content:
+            application/json:
+              schema: 
+                $ref: "#/components/schemas/ErrorMessage"
 components: 
  schemas: 
     ErrorMessage:
@@ -185,3 +215,12 @@ components:
             - NORMAL
             - WARNING
             - DANGER
+    Menue:
+      type: object
+      properties: 
+        date:
+          type: string
+        flats:
+          type: array
+          items:
+            $ref: "#/components/schemas/Flat"
