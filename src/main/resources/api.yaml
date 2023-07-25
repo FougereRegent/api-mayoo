@@ -56,6 +56,20 @@ paths:
                 $ref: "#/components/schemas/AuthenticationResponse"
         "401":
           description: Utilisateur non connecter
+  /auth/user/allergenes:
+    post:
+      description: route permettant de d'attribuer les allergenes a une personne
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SetPictograms"
+      responses: 
+        "202":
+          description: les allegernes ont bien était set à l'utilisateur
+        "406":
+          description: ajout d'allergenes inexistant ou utilisateur
   /flat:
     post:
       description: route permetant l'ajout d'un plat
@@ -215,6 +229,13 @@ components:
             - NORMAL
             - WARNING
             - DANGER
+    SetPictograms:
+      type: object
+      properties: 
+        id:
+          type: array
+          items: 
+            type: integer
     Menue:
       type: object
       properties: 

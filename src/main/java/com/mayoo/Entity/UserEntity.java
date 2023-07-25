@@ -27,6 +27,9 @@ public class UserEntity implements UserDetails {
     
     @Enumerated(EnumType.STRING)
     private EnumRight rightUser;
+    
+    @OneToMany
+    private List<PictogramEntity> allergenes;
 
     public UserEntity() {
         
