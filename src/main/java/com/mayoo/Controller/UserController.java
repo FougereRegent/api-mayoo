@@ -41,6 +41,12 @@ public class UserController implements com.mayoo.openapi.api.AuthApi {
 
     @Override
     public ResponseEntity<Void> authUserAllergenesPost(SetPictograms setPictograms, String authorization) {
-        return  new ResponseEntity(authorization, HttpStatus.OK);
+        String  token = authorization.replaceAll("Bearer ", "");
+        try {
+            userService.setAllergenes(token, setPictograms);
+        } catch (CustomException exception) {
+            return new ResponseEntity(HttpStatus.NOT_ACCEPTABLE);
+        }
+        return  new ResponseEntity(token, HttpStatus.OK);
     }
 }
