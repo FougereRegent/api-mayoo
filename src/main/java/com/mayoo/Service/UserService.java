@@ -1,7 +1,10 @@
 package com.mayoo.Service;
 
+import com.mayoo.Entity.PictogramEntity;
 import com.mayoo.Entity.UserEntity;
 import com.mayoo.Exceptions.CustomException;
+import com.mayoo.Exceptions.UserExceptions.UsernameNotFoundException;
+import com.mayoo.Repository.PictogramRepository;
 import com.mayoo.Repository.UserRepository;
 import com.mayoo.Service.ResponsabiltyChain.FieldUserCheck.CheckCreatingUserBuilder;
 import com.mayoo.Service.ResponsabiltyChain.IComponentCheck;
@@ -12,6 +15,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 @Service
@@ -23,15 +29,17 @@ public class UserService implements IUserService {
     private final AuthenticationManager authenticationManager;
     private final Random random;
     private final PasswordEncoder passwordEncoder;
+    private final PictogramRepository pictogramRepository;
 
     @Autowired
-    public UserService(UserRepository userRepository, IJwtService jwtService, AuthenticationManager authenticationManager, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, IJwtService jwtService, AuthenticationManager authenticationManager, PasswordEncoder passwordEncoder, PictogramRepository pictogramRepository) {
         this.userRepository = userRepository;
         this.random = new Random();
         this.componentCheckCreateUser = CheckCreatingUserBuilder.builderResponsabilityCheckCreatingUser(userRepository, random, passwordEncoder);
         this.jwtService = jwtService;
         this.authenticationManager = authenticationManager;
         this.passwordEncoder = passwordEncoder;
+        this.pictogramRepository = pictogramRepository;
     }
 
     @Override
@@ -71,7 +79,27 @@ public class UserService implements IUserService {
         response.token(jwtToken);
         return response;
     }
-    
+
+    @Override
+    public void setAllergenes(String jwtToken, com.mayoo.openapi.model.SetPictograms allergenes) throws CustomException {
+        Optional<UserEntity> user = userRepository.findUserEntityByEmail(jwtService.extractUsername(jwtToken));
+        if(user.isEmpty())
+            throw new UsernameNotFoundException("Utilisateur non trouvé");
+        
+        List<PictogramEntity> pictogramEntities = new ArrayList<>();
+        for (int id : allergenes.getId()) {
+            Optional<PictogramEntity> pictogramEntity = pictogramRepository.findById(id);
+            if(pictogramEntity.isPresent())
+                pictogramEntities.add(pictogramEntity.get());
+            else
+                throw new CustomException("");
+        }
+        
+        UserEntity userEntity = user.get();
+        userEntity.setAllergenes(pictogramEntities);
+        userRepository.save(userEntity);
+    }
+
     private boolean checkPasswordIsSame(UserEntity user, com.mayoo.openapi.model.AuthenticationRequest userRequest) {
         final String passwordDb  = user.getPassword();
         final String saltDb = user.getSalt();

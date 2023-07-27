@@ -59,6 +59,11 @@ paths:
   /auth/user/allergenes:
     post:
       description: route permettant de d'attribuer les allergenes a une personne
+      parameters:
+        - in: header
+          name: Authorization
+          schema: 
+            type: string
       requestBody:
         required: true
         content:

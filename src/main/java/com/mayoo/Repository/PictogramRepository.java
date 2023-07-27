@@ -7,4 +7,5 @@ import java.util.Optional;
 
 public interface PictogramRepository extends JpaRepository<PictogramEntity, Long> {
     Optional<PictogramEntity> findByName(String name);
+    Optional<PictogramEntity> findById(long id);
 }
